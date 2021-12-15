@@ -57,11 +57,15 @@ public class App {
     private static void validationNumbersElements(String[] args) {
         if ( args.length < 3 ) message( AMOUNT_EXCEPTION );
         else if ( args.length % 2 != 1 ) message( NUMBER_ODD_EXCEPTION );
+        System.exit(0);
     }
 
     private static void validationFrequency(String[] moves){
         var frequency = Arrays.stream(moves)
                 .anyMatch(move -> Collections.frequency( Arrays.asList( moves ), move) > 1);
-        if (frequency) message(FREQUENCY_EXCEPTION);
+        if (frequency){
+            message(FREQUENCY_EXCEPTION);
+            System.exit(0);
+        }
     }
 }
