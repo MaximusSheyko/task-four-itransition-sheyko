@@ -41,7 +41,10 @@ public class App {
             TableMovesCombinations.help(args);
             message( ENTER );
             movePlayer = input.next();
-        } else if ( movePlayer.equals( "0" ) ) message( "bye!" );
+        } else if ( movePlayer.equals( "0" ) ) {
+            message( "bye!" );
+            exit();
+        }
 
         var result = GameLogic.resultBattle( Integer.parseInt( movePlayer ), moveAI, args.length );
         message( "computer move : " + args[moveAI] + '\n' + "player move : " + args[Integer.parseInt( movePlayer )] );
@@ -55,9 +58,14 @@ public class App {
     }
 
     private static void validationNumbersElements(String[] args) {
-        if ( args.length < 3 ) message( AMOUNT_EXCEPTION );
-        else if ( args.length % 2 != 1 ) message( NUMBER_ODD_EXCEPTION );
-        System.exit(0);
+        if ( args.length < 3 ){
+            message( AMOUNT_EXCEPTION );
+            exit();
+        }
+        else if ( args.length % 2 != 1 ){
+            message( NUMBER_ODD_EXCEPTION );
+            exit();
+        }
     }
 
     private static void validationFrequency(String[] moves){
@@ -65,7 +73,10 @@ public class App {
                 .anyMatch(move -> Collections.frequency( Arrays.asList( moves ), move) > 1);
         if (frequency){
             message(FREQUENCY_EXCEPTION);
-            System.exit(0);
+            exit();
         }
+    }
+    private static void exit(){
+        System.exit(0);
     }
 }
